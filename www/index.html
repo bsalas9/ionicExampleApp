@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Appointment App</title>
+        <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    </head>
+    
+    <body ng-app="AppointmentApp" ng-controller="AppointmentCtrl">
+        
+      
+        <ion-header-bar class="bar-positive">
+            <h1 class="title">Appointment App</h1>
+            <button class="button button-icon pull-right" ng-click="openModal()">
+                <i class="icon ion-compose"></i>Add
+            </button>            
+        </ion-header-bar>
+        
+      <!--List of appointments-->
+      <ion-content>
+            <ion-list>
+                <ion-item ng-show="!result.length">
+                    No appointments
+                </ion-item>
+                
+                <ion-item ng-show="result.length" ng-repeat="r in result" item="r">
+                    <h3>{{r.id}}</h3>
+                    <ion-option-button class="icon-left ion-trash-a button-assertive" ng-click="cancelApps(r.id)">
+                        Cancel
+                    </ion-option-button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+        
+   <!--New appointment Modal content -->
+   <script id="new-apps.html" type="text/ng-template">
+       
+       <div class="modal">           
+       <ion-header-bar class="bar-positive">
+            <h1 class="title">New Appointment</h1>
+            <button class="button button-clear button-right" ng-click="closeModal()">Cancel</button>
+        </ion-header-bar>            
+     
+      <!-- Modal content -->
+        <ion-content>
+            <form ng-submit="addAppointment(task)">
+                <div class="list">
+                    <div class="item item-divider">
+                        Schedule Appointments                        
+                    </div>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Business meeting" ng-model="task.id">
+                    </label>
+                    <label class="item item-input">
+                        <input type="datetime-local" ng-model="task.msg">
+                    </label>
+                </div>
+                
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive">Add Apointment</button>
+                </div>
+            </form>            
+        </ion-content>
+      </div>
+    </script>
+
+      
+        <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+        <script src="ng-cordova.min.js"></script>
+        <script src="cordova.js"></script>
+        <script src="app.js"></script>
+        
+    </body>
+</html>
